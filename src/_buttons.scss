@@ -1,0 +1,27 @@
+@import 'colors';
+@import 'fonts';
+
+
+// Variables
+$padding-btn-round: 10px 20px;
+$font-color-btn-round: $home-background-color;
+$border-radius-btn-round: 5px;
+$border-btn-round: none;
+$background-color-btn-round: $primary-color;
+// $small-sized-btn: 24px 60px;
+// $medium-sized-btn: 36px 120px;
+// $large-sized-btn: 60px 200px;
+
+// Mixins
+@mixin btn-round {
+    @include font-large;
+    padding: $padding-btn-round;    
+    color: $font-color-btn-round;
+    border-radius: $border-radius-btn-round;
+    border: $border-btn-round;
+    background-color: $background-color-btn-round;
+    &:hover {
+        cursor: pointer;
+    }
+}
+

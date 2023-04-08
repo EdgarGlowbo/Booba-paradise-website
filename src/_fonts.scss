@@ -1,0 +1,53 @@
+@import 'screens';
+
+// Variables
+$font-family-base: 'Lilita One', cursive;
+
+// base font size
+html {
+  font-size: 14px;
+}
+
+@media only screen and (min-width: $smartphone-screen) {
+  html {
+      font-size: 16px;
+  }
+}
+
+@media only screen and (min-width: $small-screen) {
+  html {
+      font-size: 18px;
+  }
+}
+
+@media only screen and (min-width: $medium-screen) {
+  html {
+      font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: $large-screen) {
+  html {
+      font-size: 24px;
+  }
+}
+
+// Mixins
+@mixin font-base {
+  font-family: $font-family-base;
+  font-size: 1rem;
+  font-weight: 400;  
+}
+
+@mixin font-large {
+  font-family: $font-family-base;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+
+@mixin main-title {
+  font-family: $font-family-base;
+  text-align: center;
+  font-size: 3.2rem;
+  font-weight: 700;  
+}

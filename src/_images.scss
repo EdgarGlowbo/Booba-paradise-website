@@ -1,0 +1,11 @@
+@import 'screens';
+
+
+@mixin responsive-img($width, $height) {
+    width: $width;
+    height: $height;
+    @media screen and (max-width: $small-screen) {
+      width: 100%;
+      height: auto;
+    }
+  }

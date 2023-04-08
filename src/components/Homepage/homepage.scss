@@ -1,0 +1,90 @@
+@import '../../colors';
+@import '../../fonts';
+@import '../../buttons';
+@import '../../images';
+div {
+    background-color: $home-background-color;
+}
+// Layout
+
+.l-homepage {
+    display: flex;
+    flex-direction: column;
+    margin: 5px 12px;
+    max-height: 100vh;
+}
+
+.l-homepage__presentation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;    
+}
+// Overlap img
+.l-homepage__img {
+    z-index: 1;
+}
+.l-homepage__title {
+    position: relative;
+    transform: translateY(-50px);
+    z-index: 2;
+    @media screen and (max-width: 768px) {
+        transform: translateY(-10px);
+    }
+}
+
+// Components
+.homepage__title-wrapper span {
+    @include main-title;
+    color: $primary-color;
+    margin: 5px 0;    
+}
+.homepage__menu-btn {
+    @include btn-round;
+    align-self: center;  // Corrects btn taking full width inside flex container
+}
+.homepage__img {
+    @include responsive-img(726px, auto);
+}
+
+// Animation
+// Set variables for animation
+// $wave-amplitude: 10px;
+// $wave-period: 0.8s;
+// $wave-speed: 0.3s;
+
+// // Define keyframe animation
+// @keyframes wave {
+//   0% {
+//     transform: translateY(0);
+//   }
+//   50% {
+//     transform: translateY(-#{$wave-amplitude});
+//   }
+//   100% {
+//     transform: translateY(0);
+//   }
+// }
+
+// // Define mixin for text wave animation
+// @mixin text-wave-animation {
+//   animation-name: wave;
+//   animation-duration: $wave-period;
+//   animation-timing-function: ease-in-out;
+//   animation-iteration-count: infinite;
+//   animation-play-state: running;
+// }
+
+// // Use the mixin to animate text
+// .homepage__title-wrapper {
+//     span {
+//         display: inline-block;
+//         @include text-wave-animation;
+//     }
+      
+//     @for $i from 1 through 13 {
+//         span:nth-child(#{$i}) {
+//             animation-delay: calc(#{$wave-speed} * #{$i});
+//         }       
+//     }
+// }
