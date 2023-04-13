@@ -1,0 +1,114 @@
+@import '../../fonts';
+@import '../../colors';
+// Layout
+.l-about {
+    margin: 5px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.l-location-hours {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80%;
+}
+.l-location, .l-business-hours {
+    margin: 5px 12px;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+// Components
+
+.location__h1 {
+    @include main-title;
+    // text-align: left;
+    color: $primary-color;
+}
+
+.location__dir {
+    @include font-base;
+    color: $secondary-color-1;
+    margin: 5px 12px; 
+}
+
+.location__map {
+    width: calc(600px * (5/6));
+    height: calc(450px * (5/6));
+    border: none;
+    border-radius: 5px;
+    margin: 5px 12px;
+
+}
+
+.business-hours__status {
+    @include announcement-font;    
+}
+
+.business-hours__status--open {
+    color: $open-color;
+}
+.business-hours__status--closed {
+    color: $closed-color;
+}
+
+.business-hours__description {
+    @include thin-font;
+    color: $secondary-color-1;
+}
+
+.business-hours__panel {
+    box-sizing: content-box;
+    background-color: $panel-background-color;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    padding: 12px 5px;
+    padding-top: 0;
+    margin-top: 5px;    
+}
+
+.c-business-hours__label {
+    @include font-large;
+    box-sizing: content-box;
+    text-align: center;
+    background-color: $secondary-color-1;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    width: 100%;
+    margin: 0;
+    padding: 12px 5px;
+    color: #fff;
+}
+
+.l-business-hours__list {
+    @include thin-font;
+    font-size: 0.8rem;
+    color: $secondary-color-1;
+    margin: 5px 0;
+}
+.c-business-hours__day {
+    margin: 3px 0;
+}
+.c-business-hours__day--open {
+    font-weight: 800;
+    color: $open-color;
+}
+.c-business-hours__day--closed {
+    font-weight: 800;
+    color: $closed-color;
+}
+.c-business-hours__day--closing {
+    font-weight: 800;
+    color: $closing-color;
+}

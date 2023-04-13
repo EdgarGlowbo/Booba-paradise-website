@@ -2,16 +2,14 @@
 @import '../../fonts';
 @import '../../buttons';
 @import '../../images';
-div {
-    background-color: $home-background-color;
-}
+
 // Layout
 
 .l-homepage {
+    background-color: $home-background-color;
     display: flex;
     flex-direction: column;
-    margin: 5px 12px;
-    max-height: 100vh;
+    min-height: 100vh;
 }
 
 .l-homepage__presentation {

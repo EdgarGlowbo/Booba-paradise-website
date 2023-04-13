@@ -2,6 +2,7 @@
 
 // Variables
 $font-family-base: 'Lilita One', cursive;
+$font-family-text: 'Open Sans', sans-serif;
 
 // base font size
 html {
@@ -50,4 +51,17 @@ html {
   text-align: center;
   font-size: 3.2rem;
   font-weight: 700;  
+}
+
+@mixin announcement-font {
+  font-family: $font-family-base;
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 700;  
+}
+
+@mixin thin-font {
+  font-family: $font-family-text;  
+  font-size: 1rem;
+  font-weight: 300;    
 }
