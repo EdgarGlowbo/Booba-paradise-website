@@ -1,5 +1,6 @@
 @import '../../fonts';
 @import '../../colors';
+@import '../../screens';
 // Layout
 .l-about {
     margin: 5px 12px;
@@ -13,7 +14,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 80%;
+    min-height: 80%;  
+    @media only screen and (max-width: $smartphone-screen) {
+        flex-direction: column;        
+    }
 }
 .l-location, .l-business-hours {
     margin: 5px 12px;
@@ -22,7 +26,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    @media only screen and (max-width: $smartphone-screen) {
+        min-height: fit-content;
+    }
 }
+
 
 
 // Components
@@ -31,6 +39,7 @@
     @include main-title;
     // text-align: left;
     color: $primary-color;
+
 }
 
 .location__dir {
@@ -45,7 +54,10 @@
     border: none;
     border-radius: 5px;
     margin: 5px 12px;
-
+    @media only screen and (max-width: $smartphone-screen) {
+        width: 100%;
+        height: auto;
+    }
 }
 
 .business-hours__status {
@@ -58,10 +70,13 @@
 .business-hours__status--closed {
     color: $closed-color;
 }
-
+.business-hours__status--closing {
+    color: $closing-color;
+}
 .business-hours__description {
     @include thin-font;
     color: $secondary-color-1;
+    text-align: center;
 }
 
 .business-hours__panel {
@@ -96,10 +111,19 @@
     font-size: 0.8rem;
     color: $secondary-color-1;
     margin: 5px 0;
+    text-align: center;
 }
 .c-business-hours__day {
-    margin: 3px 0;
+    display: grid;
+    text-align: left;
+    grid-template-columns: 1fr 2fr;
+    grid-column-gap: 10px;  
 }
+.c-business-hours__weekday {
+    min-width: min-content;
+}
+
+
 .c-business-hours__day--open {
     font-weight: 800;
     color: $open-color;

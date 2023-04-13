@@ -1,76 +1,94 @@
 import React, { useEffect, useState } from "react";
 import "./about.scss";
-import { isWithinInterval, getDay, setMinutes, setHours } from "date-fns";
+import {
+  isWithinInterval,
+  getDay,
+  setMinutes,
+  setHours,
+  isAfter,
+} from "date-fns";
 
 function About() {
+  const [businessStatus, setBusinessStatus] = useState({
+    statusMsg: "ABIERTO",
+    status: "open",
+    desc: "Cerramos a las 9:00 PM",
+  });
   const [businessHours, setBusinessHours] = useState([
     {
       id: 1,
       weekday: "Lunes",
-      hours: "3:30 PM a 9:00 PM",
+      startHour: "3:30 PM",
+      endHour: "9:00 PM",
       hourInterval: {
         start: setMinutes(setHours(new Date(), 15), 30),
-        end: setHours(new Date(), 21),
+        end: setMinutes(setHours(new Date(), 21), 0),
       },
       hoursStatus: null,
     },
     {
       id: 2,
       weekday: "Martes",
-      hours: "3:30 PM a 9:00 PM",
+      startHour: "3:30 PM",
+      endHour: "9:00 PM",
       hourInterval: {
         start: setMinutes(setHours(new Date(), 15), 30),
-        end: setHours(new Date(), 21),
+        end: setMinutes(setHours(new Date(), 21), 0),
       },
       hoursStatus: null,
     },
     {
       id: 3,
       weekday: "Miércoles",
-      hours: "3:30 PM a 9:00 PM",
+      startHour: "3:30 PM",
+      endHour: "9:00 PM",
       hourInterval: {
         start: setMinutes(setHours(new Date(), 15), 30),
-        end: setHours(new Date(), 21),
+        end: setMinutes(setHours(new Date(), 21), 0),
       },
       hoursStatus: null,
     },
     {
       id: 4,
       weekday: "Jueves",
-      hours: "3:30 PM a 9:00 PM",
+      startHour: "3:30 PM",
+      endHour: "9:00 PM",
       hourInterval: {
         start: setMinutes(setHours(new Date(), 15), 30),
-        end: setHours(new Date(), 21),
+        end: setMinutes(setHours(new Date(), 21), 0),
       },
       hoursStatus: null,
     },
     {
       id: 5,
       weekday: "Viernes",
-      hours: "3:30 PM a 9:00 PM",
+      startHour: "3:30 PM",
+      endHour: "9:00 PM",
       hourInterval: {
         start: setMinutes(setHours(new Date(), 15), 30),
-        end: setHours(new Date(), 21),
+        end: setMinutes(setHours(new Date(), 21), 0),
       },
       hoursStatus: null,
     },
     {
       id: 6,
       weekday: "Sábado",
-      hours: "3:30 PM a 9:00 PM",
+      startHour: "3:30 PM",
+      endHour: "9:00 PM",
       hourInterval: {
         start: setMinutes(setHours(new Date(), 15), 30),
-        end: setHours(new Date(), 21),
+        end: setMinutes(setHours(new Date(), 21), 0),
       },
       hoursStatus: null,
     },
     {
       id: 0,
       weekday: "Domingo",
-      hours: "4:30 PM a 9:00 PM",
+      startHour: "4:00 PM",
+      endHour: "8:00 PM",
       hourInterval: {
-        start: setMinutes(setHours(new Date(), 16), 30),
-        end: setHours(new Date(), 21),
+        start: setMinutes(setHours(new Date(), 16), 0),
+        end: setMinutes(setHours(new Date(), 20), 0),
       },
       hoursStatus: null,
     },
@@ -85,10 +103,35 @@ function About() {
           const diffInMs = Math.abs(day.hourInterval.end - today);
           const diffInMinutes = diffInMs / (1000 * 60);
           if (diffInMinutes <= 60) {
+            setBusinessStatus({
+              statusMsg: "ABIERTO",
+              desc: `Cerraremos pronto, a las ${day.endHour}`,
+              status: "closing",
+            });
             return { ...day, hoursStatus: "closing" };
           }
+          setBusinessStatus({
+            statusMsg: "ABIERTO",
+            desc: `Nuestro horario de cierre es a las ${day.endHour}`,
+            status: "open",
+          });
           return { ...day, hoursStatus: "open" };
         } else {
+          if (isAfter(today, day.hourInterval.end)) {
+            setBusinessStatus({
+              statusMsg: "CERRADO",
+              desc: `Estaremos listos para servirle mañana a las ${
+                businessHours[weekday + 1].startHour
+              }`,
+              status: "closed",
+            });
+          } else {
+            setBusinessStatus({
+              statusMsg: "CERRADO",
+              desc: `Estaremos disponibles a partir de las ${day.startHour}`,
+              status: "closed",
+            });
+          }
           return { ...day, hoursStatus: "closed" };
         }
       } else {
@@ -113,11 +156,13 @@ function About() {
           ></iframe>
         </div>
         <div className="l-business-hours">
-          <h1 className="business-hours__status business-hours__status--open">
-            ABIERTO
+          <h1
+            className={`business-hours__status business-hours__status--${businessStatus.status}`}
+          >
+            {businessStatus.statusMsg}
           </h1>
           <span className="business-hours__description">
-            Cerramos a las 9:00 PM
+            {businessStatus.desc}
           </span>
           <div className="business-hours__panel">
             <h3 className="c-business-hours__label">Horario de atención</h3>
@@ -129,13 +174,23 @@ function About() {
                       key={weekday.id}
                       className={`c-business-hours__day c-business-hours__day--${weekday.hoursStatus}`}
                     >
-                      {weekday.weekday}: {weekday.hours}
+                      <span className="c-business-hours__weekday">
+                        {weekday.weekday}:
+                      </span>
+                      <span className="c-business-hours__hours">
+                        {weekday.startHour} a {weekday.endHour}
+                      </span>
                     </li>
                   );
                 } else {
                   return (
                     <li key={weekday.id} className="c-business-hours__day">
-                      {weekday.weekday}: {weekday.hours}
+                      <span className="c-business-hours__weekday">
+                        {weekday.weekday}:
+                      </span>
+                      <span className="c-business-hours__hours">
+                        {weekday.startHour} a {weekday.endHour}
+                      </span>
                     </li>
                   );
                 }
